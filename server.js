@@ -6,6 +6,10 @@ const app = express()
 //Connect Database
 connectDB()
 
+//Init Middleware
+//app.use(express.json({extended: false}))
+app.use(express.json())
+
 //Express
 //app.Method(PATH, HANDLER)
 
