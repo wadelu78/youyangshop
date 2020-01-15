@@ -2,7 +2,16 @@ const express = require('express')
 
 const app = express()
 
+//Express
+//app.Method(PATH, HANDLER)
+
 app.get('/', (req, res) => res.send('Hello World!'))
+
+//Define Routes
+//Every backend routes with /api
+app.use('/api/users', require('./routes/users'))
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/products', require('./routes/products'))
 
 const PORT = process.env.PORT || 5000
 
