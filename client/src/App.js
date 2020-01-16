@@ -1,10 +1,20 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect } from 'react'
 
-function App() {
+import 'materialize-css/dist/css/materialize.min.css'
+import M from 'materialize-css/dist/js/materialize.min.js'
+
+import './App.css'
+
+import AppNavbar from './components/layout/AppNavbar'
+
+const App = () => {
+  useEffect(() => {
+    //Init Materialize JS
+    M.AutoInit()
+  })
   return (
     <div className="App">
-      <h1>YouYang Shop</h1>
+      <AppNavbar />
     </div>
   );
 }
