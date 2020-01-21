@@ -31,8 +31,9 @@ const ProductSchema = mongoose.Schema({
     type: String,
     default: 'no description'
   },
-  image: {
-    type: String
+  mainImageAddress: {
+    type: String,
+    required: true
   },
   price: {
     type: Number,

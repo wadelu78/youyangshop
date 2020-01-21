@@ -19,6 +19,7 @@ router.post('/', [
   check('name_chn', 'A product name in Chinese is required').not().isEmpty(),
   check('category', 'The category of the product is required').not().isEmpty(),
   check('subcategory', 'The subcategory of the product is required').not().isEmpty(),
+  check('mainImageAddress', 'The main image of the product is required').not().isEmpty(),
   check('price', 'The price of the product in Chinese Yuan is required').not().isEmpty()
 ], async (req, res) => {
   const errors = validationResult(req)
@@ -28,7 +29,7 @@ router.post('/', [
     })
   }
 
-  const { product_id, name_eng, name_chn, category, subcategory, description, image, price } = req.body
+  const { product_id, name_eng, name_chn, category, subcategory, description, mainImageAddress, price } = req.body
 
 
   try {
@@ -48,11 +49,11 @@ router.post('/', [
       category,
       subcategory,
       description,
-      image,
+      mainImageAddress,
       price
     })
     await product.save()
-    res.send(product)
+    res.send(product + ' has been added to the database')
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')
