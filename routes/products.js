@@ -6,8 +6,14 @@ const Product = require('../models/Product')
 // @route      GET api/products
 // @desc       Get all users products
 // @access     Private
-router.get('/', (req, res) => {
-  res.send('Get all products')
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find()
+    res.json(products)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
 })
 
 // @route       POST api/products
