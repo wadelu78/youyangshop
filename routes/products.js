@@ -8,7 +8,20 @@ const Product = require('../models/Product')
 // @access     Private
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find()
+    const recommendProducts = await Product.find({ recommend: true })
+    const popularProducts = await Product.find({ popular: true })
+    const infantMilkPowder = await Product.find({ category: 'infant milkpowder' })
+    const adultMilkPowder = await Product.find({ category: 'adult milkpowder' })
+    const honey = await Product.find({ category: 'honey' })
+    const health = await Product.find({ category: 'health' })
+    const products = {
+      recommendProducts,
+      popularProducts,
+      infantMilkPowder,
+      adultMilkPowder,
+      honey,
+      health
+    }
     res.json(products)
   } catch (error) {
     console.error(error.message)
@@ -24,7 +37,6 @@ router.post('/', [
   check('product_id', 'A product id is required').not().isEmpty(),
   check('name_chn', 'A product name in Chinese is required').not().isEmpty(),
   check('category', 'The category of the product is required').not().isEmpty(),
-  check('subcategory', 'The subcategory of the product is required').not().isEmpty(),
   check('mainImageAddress', 'The main image of the product is required').not().isEmpty(),
   check('price', 'The price of the product in Chinese Yuan is required').not().isEmpty()
 ], async (req, res) => {
@@ -35,7 +47,7 @@ router.post('/', [
     })
   }
 
-  const { product_id, name_eng, name_chn, category, subcategory, description, mainImageAddress, price } = req.body
+  const { product_id, name_eng, name_chn, category, description, mainImageAddress, price, recommend, popular } = req.body
 
 
   try {
@@ -53,10 +65,11 @@ router.post('/', [
       name_eng,
       name_chn,
       category,
-      subcategory,
       description,
       mainImageAddress,
-      price
+      price,
+      recommend,
+      popular
     })
     await product.save()
     res.send(product + ' has been added to the database')

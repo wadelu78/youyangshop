@@ -4,7 +4,7 @@ import ProductItem from './ProductItem'
 const ProductList = (props) => {
   return (
     <Fragment>
-      <h3>Products:</h3>
+      <h5>{props.title}</h5>
       <div className="row">
         {props.products.map(product => {
           return <ProductItem key={product.product_id} product={product} />

@@ -2,11 +2,9 @@ const mongoose = require('mongoose')
 
 const ProductSchema = mongoose.Schema({
   product_id: {
-    //0101001
-    //AABBCCC
-    //AA category
-    //BB subcategory
-    //CCC product
+    //CCPPP
+    //CC category id string, 01,02,03 -- 99
+    //PPP product id string, 001,002,003,004 --- 999
     type: String,
     required: true,
     unique: true
@@ -23,10 +21,6 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  subcategory: {
-    type: String,
-    required: true
-  },
   description: {
     type: String,
     default: 'no description'
@@ -38,6 +32,14 @@ const ProductSchema = mongoose.Schema({
   price: {
     type: Number,
     required: true
+  },
+  recommend: {
+    type: Boolean,
+    default: false
+  },
+  popular: {
+    type: Boolean,
+    default: false
   },
   date: {
     type: Date,

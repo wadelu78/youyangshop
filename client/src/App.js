@@ -11,9 +11,22 @@ import AppNavbar from './components/layout/AppNavbar'
 import ProductList from './components/ProductList'
 
 const App = () => {
-  const [products, setProducts] = useState([])
+  //recommend product
+  const [recommendProduct, setRecommendProduct] = useState([])
+  const [popularProduct, setPopularProduct] = useState([])
+  const [infantMilkPowder, setInfantMilkPowder] = useState([])
+  const [adultMilkPowder, setAdultMilkPowder] = useState([])
+  const [honey, setHoney] = useState([])
+  const [health, setHealth] = useState([])
   useEffect(() => {
-    axios.get('/api/products').then(res => setProducts(res.data))
+    axios.get('/api/products').then(res => {
+      setRecommendProduct(res.data.recommendProducts)
+      setPopularProduct(res.data.popularProducts)
+      setInfantMilkPowder(res.data.infantMilkPowder)
+      setAdultMilkPowder(res.data.adultMilkPowder)
+      setHoney(res.data.honey)
+      setHealth(res.data.health)
+    })
   }, [])
   useEffect(() => {
     //Init Materialize JS
@@ -22,7 +35,12 @@ const App = () => {
   return (
     <div className="App">
       <AppNavbar />
-      <ProductList products={products} />
+      <ProductList title="Recommend Products" products={recommendProduct} />
+      <ProductList title="Popular Products" products={popularProduct} />
+      <ProductList title="Infant Milk Powder" products={infantMilkPowder} />
+      <ProductList title="Adult Milk Powder" products={adultMilkPowder} />
+      <ProductList title="Honey" products={honey} />
+      <ProductList title="Health" products={health} />
     </div>
   );
 }
