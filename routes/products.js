@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const { check, validationResult } = require('express-validator')
+const adminAuth = require('../middleware/adminAuth')
 
 const Product = require('../models/Product')
 // @route      GET api/products
-// @desc       Get all users products
-// @access     Private
+// @desc       Get all types of products, when the main page is opened
+// @access     Public
 router.get('/', async (req, res) => {
   try {
     const recommendProducts = await Product.find({ recommend: true })
@@ -14,6 +15,8 @@ router.get('/', async (req, res) => {
     const adultMilkPowder = await Product.find({ category: 'adult milkpowder' })
     const honey = await Product.find({ category: 'honey' })
     const health = await Product.find({ category: 'health' })
+
+    //put all of them into one object called 'products'
     const products = {
       recommendProducts,
       popularProducts,
@@ -31,15 +34,16 @@ router.get('/', async (req, res) => {
 
 // @route       POST api/products
 // @desc        Post an product into the mongoDB
-// @access      For now, it is public, at last, only the admin user can do that
+// @access      Private, only the admin user can do that
 
-router.post('/', [
+//use multiple middleware
+router.post('/', [adminAuth, [
   check('product_id', 'A product id is required').not().isEmpty(),
   check('name_chn', 'A product name in Chinese is required').not().isEmpty(),
   check('category', 'The category of the product is required').not().isEmpty(),
   check('mainImageAddress', 'The main image of the product is required').not().isEmpty(),
   check('price', 'The price of the product in Chinese Yuan is required').not().isEmpty()
-], async (req, res) => {
+]], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({

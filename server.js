@@ -8,6 +8,7 @@ connectDB()
 
 //Init Middleware
 //app.use(express.json({extended: false}))
+//no need body parser
 app.use(express.json())
 
 //Express
@@ -20,6 +21,8 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.use('/api/users', require('./routes/users'))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/products', require('./routes/products'))
+app.use('/api/admin', require('./routes/admin'))
+app.use('/api/admin-auth', require('./routes/adminAuth'))
 
 const PORT = process.env.PORT || 5000
 
