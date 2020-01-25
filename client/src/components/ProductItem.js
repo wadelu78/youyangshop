@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import CartContext from '../context/cart/cartContext'
 
 const ProductItem = (props) => {
   const { mainImageAddress, name_chn, price } = props.product
+
+  const cartContext = useContext(CartContext)
+
+  const addToCart = () => cartContext.addToCart(props.product)
+
   return (
     <div className="col s6 m4 l3">
       <div className="card">
         <div className="card-image">
           <div className="container">
-            <img src={mainImageAddress} className="responsive-img" />
+            <img src={mainImageAddress} alt="" className="responsive-img" />
           </div>
         </div>
         <div className="card-content">
@@ -16,7 +22,7 @@ const ProductItem = (props) => {
         <div className="card-action">
 
           <p>￥{price}</p>
-          <a className="waves-effect waves-light btn" >Add to Cart</a>
+          <a className="waves-effect waves-light btn" onClick={addToCart}>Add to Cart</a>
 
         </div>
       </div>

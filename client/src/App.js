@@ -9,15 +9,22 @@ import axios from 'axios'
 
 import AppNavbar from './components/layout/AppNavbar'
 import ProductList from './components/ProductList'
+import CartState from './context/cart/CartState'
+
+import Cart from './components/Cart'
+
+
 
 const App = () => {
-  //recommend product
+  //all types of  products
   const [recommendProduct, setRecommendProduct] = useState([])
   const [popularProduct, setPopularProduct] = useState([])
   const [infantMilkPowder, setInfantMilkPowder] = useState([])
   const [adultMilkPowder, setAdultMilkPowder] = useState([])
   const [honey, setHoney] = useState([])
   const [health, setHealth] = useState([])
+
+
   useEffect(() => {
     axios.get('/api/products').then(res => {
       setRecommendProduct(res.data.recommendProducts)
@@ -33,15 +40,18 @@ const App = () => {
     M.AutoInit()
   })
   return (
-    <div className="App">
-      <AppNavbar />
-      <ProductList title="Recommend Products" products={recommendProduct} />
-      <ProductList title="Popular Products" products={popularProduct} />
-      <ProductList title="Infant Milk Powder" products={infantMilkPowder} />
-      <ProductList title="Adult Milk Powder" products={adultMilkPowder} />
-      <ProductList title="Honey" products={honey} />
-      <ProductList title="Health" products={health} />
-    </div>
+    <CartState>
+      <div className="App">
+        <AppNavbar />
+        <ProductList title="Recommend Products" products={recommendProduct} />
+        <ProductList title="Popular Products" products={popularProduct} />
+        <ProductList title="Infant Milk Powder" products={infantMilkPowder} />
+        <ProductList title="Adult Milk Powder" products={adultMilkPowder} />
+        <ProductList title="Honey" products={honey} />
+        <ProductList title="Health" products={health} />
+        <Cart />
+      </div>
+    </CartState>
   );
 }
 

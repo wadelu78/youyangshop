@@ -76,7 +76,8 @@ router.post('/', [adminAuth, [
       popular
     })
     await product.save()
-    res.send(product + ' has been added to the database')
+    //return the added product
+    res.json(product)
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')

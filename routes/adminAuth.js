@@ -12,7 +12,7 @@ const authAdmin = require('../middleware/adminAuth')
 const Admin = require('../models/Admin')
 
 // @route      GET api/auth
-// @desc       Get logged in user
+// @desc       Get logged in admin
 // @access     Private
 router.get('/', authAdmin, async (req, res) => {
   try {
