@@ -4,7 +4,8 @@ import cartReducer from './cartReducer'
 
 import {
   ADD_TO_CART,
-  DELETE_ITEM
+  DELETE_ITEM,
+  MINUS_QUALITY
 } from '../types'
 
 const CartState = props => {
@@ -47,11 +48,28 @@ const CartState = props => {
     })
   }
   //Delete an item in the cart
+  const deleteItem = id => {
+    dispatch({
+      type: DELETE_ITEM,
+      payload: id
+    })
+  }
 
+
+
+  //quality -1 the lower limit is 1
+  const minusQuality = id => {
+    dispatch({
+      type: MINUS_QUALITY,
+      payload: id
+    })
+  }
   return (
     <cartContext.Provider value={{
       cart: state.cart,
-      addToCart
+      addToCart,
+      deleteItem,
+      minusQuality
     }}>
       {props.children}
     </cartContext.Provider>

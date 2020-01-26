@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
 
+
 import './App.css'
 
 import axios from 'axios'
 
 import AppNavbar from './components/layout/AppNavbar'
+import CartBtn from './components/layout/CartBtn'
+import CartModal from './components/layout/CartModal'
+
 import ProductList from './components/ProductList'
 import CartState from './context/cart/CartState'
 
@@ -43,13 +47,14 @@ const App = () => {
     <CartState>
       <div className="App">
         <AppNavbar />
+        <CartBtn />
+        <CartModal />
         <ProductList title="Recommend Products" products={recommendProduct} />
         <ProductList title="Popular Products" products={popularProduct} />
         <ProductList title="Infant Milk Powder" products={infantMilkPowder} />
         <ProductList title="Adult Milk Powder" products={adultMilkPowder} />
         <ProductList title="Honey" products={honey} />
         <ProductList title="Health" products={health} />
-        <Cart />
       </div>
     </CartState>
   );
