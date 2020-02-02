@@ -14,6 +14,7 @@ import AppNavbar from './components/layout/AppNavbar'
 import Home from './components/pages/Home'
 import UserRegister from './components/UserRegister'
 import UserLogin from './components/UserLogin'
+import Alerts from './components/layout/Alerts'
 
 import CartBtn from './components/layout/CartBtn'
 import CartModal from './components/layout/CartModal'
@@ -21,6 +22,7 @@ import CartModal from './components/layout/CartModal'
 import ProductList from './components/ProductList'
 import CartState from './context/cart/CartState'
 import UserAuthState from './context/userAuth/UserAuthState'
+import AlertState from './context/alert/AlertState'
 
 import Cart from './components/Cart'
 
@@ -32,14 +34,17 @@ const App = () => {
     <Router>
       <CartState>
         <UserAuthState>
-          <div className="App">
-            <AppNavbar />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/user-register" component={UserRegister} />
-              <Route exact path="/user-login" component={UserLogin} />
-            </Switch>
-          </div>
+          <AlertState>
+            <div className="App">
+              <AppNavbar />
+              <Alerts />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/user-register" component={UserRegister} />
+                <Route exact path="/user-login" component={UserLogin} />
+              </Switch>
+            </div>
+          </AlertState>
         </UserAuthState>
       </CartState>
     </Router>
