@@ -3,19 +3,24 @@ import AlertContext from '../context/alert/alertContext'
 
 import UserAuthContext from '../context/userAuth/userAuthContext'
 
-const UserRegister = () => {
+const UserRegister = (props) => {
   const alertContext = useContext(AlertContext)
   const userAuthContext = useContext(UserAuthContext)
 
   const { setAlert } = alertContext
-  const { registerUser, error, clearErrors } = userAuthContext
+  const { registerUser, error, clearErrors, isAuthenticated } = userAuthContext
 
   useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/')
+    }
+
+
     if (error === 'User already exists') {
       setAlert(error, 'danger')
       clearErrors()
     }
-  }, [error])
+  }, [error, isAuthenticated, props.history])
 
   const [user, setUser] = useState({
     email: '',

@@ -26,7 +26,11 @@ import AlertState from './context/alert/AlertState'
 
 import Cart from './components/Cart'
 
+import setUserAuthToken from './utils/setUserAuthToken'
 
+if (localStorage.token) {
+  setUserAuthToken(localStorage.token)
+}
 
 const App = () => {
 

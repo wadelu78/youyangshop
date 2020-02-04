@@ -1,12 +1,18 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import CartBtn from '../layout/CartBtn'
 import CartModal from '../layout/CartModal'
 import ProductList from '../ProductList'
+import UserAuthContext from '../../context/userAuth/userAuthContext'
 
 const Home = () => {
+  // const userAuthContext = useContext(UserAuthContext)
+
+  // useEffect(() => {
+  //   userAuthContext.loadUser()
+  // }, [])
   //all types of  products
   const [recommendProduct, setRecommendProduct] = useState([])
   const [popularProduct, setPopularProduct] = useState([])
