@@ -12,6 +12,7 @@ import axios from 'axios'
 import AppNavbar from './components/layout/AppNavbar'
 
 import Home from './components/pages/Home'
+import Admin from './components/pages/Admin'
 import UserRegister from './components/UserRegister'
 import UserLogin from './components/UserLogin'
 import Alerts from './components/layout/Alerts'
@@ -27,6 +28,7 @@ import AlertState from './context/alert/AlertState'
 import Cart from './components/Cart'
 
 import setUserAuthToken from './utils/setUserAuthToken'
+import AppFooter from './components/layout/AppFooter'
 
 if (localStorage.token) {
   setUserAuthToken(localStorage.token)
@@ -46,7 +48,9 @@ const App = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/user-register" component={UserRegister} />
                 <Route exact path="/user-login" component={UserLogin} />
+                <Route exact path="/admin" component={Admin} />
               </Switch>
+              <AppFooter />
             </div>
           </AlertState>
         </UserAuthState>
