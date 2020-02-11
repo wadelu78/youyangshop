@@ -1,0 +1,18 @@
+.logo {
+  display: inline-block;
+  height: 100%;
+  margin-left: 2rem;
+}
+.logo > img {
+  vertical-align: middle;
+}
+.logo > span {
+  font-size: x-large;
+  font-style: italic;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.nav-link-font {
+  font-weight: bold;
+}

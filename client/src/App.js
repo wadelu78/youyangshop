@@ -1,48 +1,46 @@
-import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import 'materialize-css/dist/css/materialize.min.css'
-import M from 'materialize-css/dist/js/materialize.min.js'
+import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
 
+import "./App.css";
 
-import './App.css'
+import axios from "axios";
 
-import axios from 'axios'
+import Navbar from "./components/layout/Navbar";
 
-import AppNavbar from './components/layout/AppNavbar'
+import Home from "./components/pages/Home";
+import Admin from "./components/pages/Admin";
+import UserRegister from "./components/UserRegister";
+import UserLogin from "./components/UserLogin";
+import Alerts from "./components/layout/Alerts";
 
-import Home from './components/pages/Home'
-import Admin from './components/pages/Admin'
-import UserRegister from './components/UserRegister'
-import UserLogin from './components/UserLogin'
-import Alerts from './components/layout/Alerts'
+import CartBtn from "./components/layout/CartBtn";
+import CartModal from "./components/layout/CartModal";
 
-import CartBtn from './components/layout/CartBtn'
-import CartModal from './components/layout/CartModal'
+import ProductList from "./components/ProductList";
+import CartState from "./context/cart/CartState";
+import UserAuthState from "./context/userAuth/UserAuthState";
+import AlertState from "./context/alert/AlertState";
 
-import ProductList from './components/ProductList'
-import CartState from './context/cart/CartState'
-import UserAuthState from './context/userAuth/UserAuthState'
-import AlertState from './context/alert/AlertState'
+import Cart from "./components/Cart";
 
-import Cart from './components/Cart'
-
-import setUserAuthToken from './utils/setUserAuthToken'
-import AppFooter from './components/layout/AppFooter'
+import setUserAuthToken from "./utils/setUserAuthToken";
+import AppFooter from "./components/layout/AppFooter";
 
 if (localStorage.token) {
-  setUserAuthToken(localStorage.token)
+  setUserAuthToken(localStorage.token);
 }
 
 const App = () => {
-
   return (
     <Router>
       <CartState>
         <UserAuthState>
           <AlertState>
             <div className="App">
-              <AppNavbar />
+              <Navbar />
               <Alerts />
               <Switch>
                 <Route exact path="/" component={Home} />
@@ -57,6 +55,6 @@ const App = () => {
       </CartState>
     </Router>
   );
-}
+};
 
 export default App;

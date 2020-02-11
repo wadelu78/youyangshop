@@ -1,5 +1,6 @@
 import React from 'react'
 import DropZone from 'react-dropzone'
+import axios from 'axios'
 
 const FileUpload = () => {
   const onDrop = (files) => {
@@ -7,6 +8,9 @@ const FileUpload = () => {
     const config = {
       header: { 'content-type': 'multipart/form-data' }
     }
+    formData.append("file", files[0])
+
+    axios.post('/')
   }
   return (
     <div style={{
