@@ -20,9 +20,10 @@ const Home = () => {
   const [adultMilkPowder, setAdultMilkPowder] = useState([])
   const [honey, setHoney] = useState([])
   const [health, setHealth] = useState([])
-
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     axios.get('/api/products').then(res => {
       setRecommendProduct(res.data.recommendProducts)
       setPopularProduct(res.data.popularProducts)
@@ -30,6 +31,7 @@ const Home = () => {
       setAdultMilkPowder(res.data.adultMilkPowder)
       setHoney(res.data.honey)
       setHealth(res.data.health)
+      setLoading(false)
     })
   }, [])
   useEffect(() => {
@@ -40,12 +42,28 @@ const Home = () => {
     <Fragment>
       <CartBtn />
       <CartModal />
-      <ProductList title="Recommend Products" products={recommendProduct} />
-      <ProductList title="Popular Products" products={popularProduct} />
-      <ProductList title="Infant Milk Powder" products={infantMilkPowder} />
-      <ProductList title="Adult Milk Powder" products={adultMilkPowder} />
-      <ProductList title="Honey" products={honey} />
-      <ProductList title="Health" products={health} />
+      <ProductList
+        loading={loading}
+        title="Recommend Products"
+        products={recommendProduct}
+      />
+      <ProductList
+        loading={loading}
+        title="Popular Products"
+        products={popularProduct}
+      />
+      <ProductList
+        loading={loading}
+        title="Infant Milk Powder"
+        products={infantMilkPowder}
+      />
+      <ProductList
+        loading={loading}
+        title="Adult Milk Powder"
+        products={adultMilkPowder}
+      />
+      <ProductList loading={loading} title="Honey" products={honey} />
+      <ProductList loading={loading} title="Health" products={health} />
     </Fragment>
   )
 }
